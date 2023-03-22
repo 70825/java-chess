@@ -1,6 +1,7 @@
 package chess.domain.game;
 
 import chess.domain.Board;
+import chess.domain.piece.Pawn;
 import chess.domain.piece.Piece;
 import chess.domain.position.File;
 import chess.domain.position.Position;
@@ -12,6 +13,7 @@ import java.util.HashMap;
 public class ChessGame {
 
     private static final int INITIAL_SCORE = 0;
+
     private final Board board;
     private Team turn;
 
@@ -45,6 +47,7 @@ public class ChessGame {
         for (final Rank rank : Rank.values()) {
             score = score.add(calculateScoreEachPosition(Position.of(file, rank)));
         }
+        score = score.minus(calculatePawnScoreByCountEachFile(file));
 
         return score;
     }
@@ -54,6 +57,26 @@ public class ChessGame {
         final Piece piece = board.getPiece(position);
 
         return score.add(PieceScore.findByPiece(piece, turn));
+    }
+
+    private Score calculatePawnScoreByCountEachFile(final File file) {
+        int pawnCount = 0;
+
+        for(final Rank rank : Rank.values()) {
+            pawnCount += hasPawn(Position.of(file, rank), turn);
+        }
+
+        if (pawnCount <= 1) {
+            return Score.from(0);
+        }
+        return Score.from(0.5 * pawnCount);
+    }
+
+    private int hasPawn(final Position position, final Team team) {
+        if (board.getPiece(position).equals(new Pawn(team))) {
+            return 1;
+        }
+        return 0;
     }
 
     public Board getBoard() {
