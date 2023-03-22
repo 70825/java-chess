@@ -44,7 +44,7 @@ public class OutputView {
 
     }
 
-    public static void printWinning(final Score white, final Score black) {
+    public static void printScoreWinning(final Score white, final Score black) {
         if (white.value() > black.value()) {
             System.out.println("결과: White 팀 승리");
             return;
@@ -54,6 +54,15 @@ public class OutputView {
             return;
         }
         System.out.println("결과: 무승부");
+    }
+
+    public static void printResultWinning(final Team team) {
+        if (team == Team.WHITE) {
+            System.out.println("White 팀 승리");
+        }
+        if (team == Team.BLACK) {
+            System.out.println("Black 팀 승리");
+        }
     }
 
     public static void printErrorMessage(IllegalArgumentException e) {

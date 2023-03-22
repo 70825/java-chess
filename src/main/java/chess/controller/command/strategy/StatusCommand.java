@@ -21,7 +21,7 @@ public class StatusCommand implements StrategyCommand {
             Score black = chessGame.calculateScore(Team.BLACK);
 
             OutputView.printStatus(white, black);
-            OutputView.printWinning(white, black);
+            OutputView.printScoreWinning(white, black);
             return ChessState.PROGRESS;
         }
 
