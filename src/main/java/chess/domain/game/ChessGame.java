@@ -31,39 +31,39 @@ public class ChessGame {
         turn = turn.reverse();
     }
 
-    public Score calculateScore() {
+    public Score calculateScore(final Team team) {
         Score score = Score.from(INITIAL_SCORE);
 
         for (final File file : File.values()) {
-            score = score.add(calculateScoreEachFile(file));
+            score = score.add(calculateScoreEachFile(file, team));
         }
 
         return score;
     }
 
-    private Score calculateScoreEachFile(final File file) {
+    private Score calculateScoreEachFile(final File file, final Team team) {
         Score score = Score.from(INITIAL_SCORE);
 
         for (final Rank rank : Rank.values()) {
-            score = score.add(calculateScoreEachPosition(Position.of(file, rank)));
+            score = score.add(calculateScoreEachPosition(Position.of(file, rank), team));
         }
-        score = score.minus(calculatePawnScoreByCountEachFile(file));
+        score = score.minus(calculatePawnScoreByCountEachFile(file, team));
 
         return score;
     }
 
-    private Score calculateScoreEachPosition(final Position position) {
+    private Score calculateScoreEachPosition(final Position position, final Team team) {
         final Score score = Score.from(INITIAL_SCORE);
         final Piece piece = board.getPiece(position);
 
-        return score.add(PieceScore.findByPiece(piece, turn));
+        return score.add(PieceScore.findByPiece(piece, team));
     }
 
-    private Score calculatePawnScoreByCountEachFile(final File file) {
+    private Score calculatePawnScoreByCountEachFile(final File file, final Team team) {
         int pawnCount = 0;
 
         for(final Rank rank : Rank.values()) {
-            pawnCount += hasPawn(Position.of(file, rank), turn);
+            pawnCount += hasPawn(Position.of(file, rank), team);
         }
 
         if (pawnCount <= 1) {

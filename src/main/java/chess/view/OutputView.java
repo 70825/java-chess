@@ -1,11 +1,13 @@
 package chess.view;
 
 import chess.domain.Board;
+import chess.domain.game.ChessGame;
 import chess.domain.game.Score;
 import chess.domain.piece.Piece;
 import chess.domain.position.File;
 import chess.domain.position.Position;
 import chess.domain.position.Rank;
+import chess.domain.team.Team;
 
 import java.util.Map;
 
@@ -37,8 +39,21 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printScore(Score score) {
-        System.out.println("현재 점수는 " + score.value() + "점 입니다.");
+    public static void printStatus(final Score white, final Score black) {
+        System.out.printf("[현재 점수]\nWhite 팀: %.1f점\nBlack 팀: %.1f점\n", white.value(), black.value());
+
+    }
+
+    public static void printWinning(final Score white, final Score black) {
+        if (white.value() > black.value()) {
+            System.out.println("결과: White 팀 승리");
+            return;
+        }
+        if (white.value() < black.value()) {
+            System.out.println("결과: Black 팀 승리");
+            return;
+        }
+        System.out.println("결과: 무승부");
     }
 
     public static void printErrorMessage(IllegalArgumentException e) {

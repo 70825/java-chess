@@ -17,8 +17,8 @@ public class PieceScore {
             Empty.class, Score.from(0)
     );
 
-    public static Score findByPiece(final Piece piece, final Team turn) {
-        if (piece.isSameTeam(turn)) {
+    public static Score findByPiece(final Piece piece, final Team team) {
+        if (piece.isSameTeam(team)) {
             return pieceScore.get(piece.getClass());
         }
         return Score.from(0);
