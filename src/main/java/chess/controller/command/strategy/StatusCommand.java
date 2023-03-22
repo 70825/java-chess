@@ -8,6 +8,8 @@ import chess.view.OutputView;
 
 public class StatusCommand implements StrategyCommand {
 
+    private static final String CANNOT_STATUS_BEFORE_START_ERROR_MESSAGE = "게임이 시작되기 전에 점수를 확인할 수 없습니다";
+
     private StatusCommand() {}
 
     public static StatusCommand create() {
@@ -25,6 +27,6 @@ public class StatusCommand implements StrategyCommand {
             return ChessState.PROGRESS;
         }
 
-        throw new IllegalArgumentException("게임이 시작되기 전에 점수를 확인할 수 없습니다");
+        throw new IllegalArgumentException(CANNOT_STATUS_BEFORE_START_ERROR_MESSAGE);
     }
 }

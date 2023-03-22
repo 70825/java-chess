@@ -5,6 +5,8 @@ import chess.domain.game.ChessGame;
 
 public class EndCommand implements StrategyCommand {
 
+    private static final String CANNOT_END_BEFORE_START_ERROR_MESSAGE = "게임을 시작하기 전에 종료할 수 없습니다";
+
     private EndCommand() {
     }
 
@@ -18,6 +20,6 @@ public class EndCommand implements StrategyCommand {
             return ChessState.END;
         }
 
-        throw new IllegalArgumentException("게임을 시작하기 전에 종료할 수 없습니다");
+        throw new IllegalArgumentException(CANNOT_END_BEFORE_START_ERROR_MESSAGE);
     }
 }

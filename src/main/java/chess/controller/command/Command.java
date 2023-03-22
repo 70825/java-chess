@@ -30,7 +30,7 @@ public enum Command {
                 .filter(command -> isSameCommand(input, command) && isSameSize(input, command))
                 .map(command -> command.actionCommandFactory.create(input))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("입력값은 `start`, `end`, `move source target`만 가능합니다."));
+                .orElseThrow(() -> new IllegalArgumentException("입력값은 `start`, `end`, `move source target`, `status`만 가능합니다."));
     }
 
     private static boolean isSameCommand(final List<String> input, final Command command) {
