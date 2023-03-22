@@ -1,9 +1,6 @@
 package chess.controller.command;
 
-import chess.controller.command.factory.ActionCommandFactory;
-import chess.controller.command.factory.EndCommandFactory;
-import chess.controller.command.factory.MoveCommandFactory;
-import chess.controller.command.factory.StartCommandFactory;
+import chess.controller.command.factory.*;
 import chess.controller.command.strategy.StrategyCommand;
 
 import java.util.Arrays;
@@ -11,9 +8,10 @@ import java.util.List;
 
 public enum Command {
 
-    start("start", 1, new StartCommandFactory()),
-    move("move", 3, new MoveCommandFactory()),
-    end("end", 1, new EndCommandFactory());
+    START("start", 1, new StartCommandFactory()),
+    MOVE("move", 3, new MoveCommandFactory()),
+    STATUS("status", 1, new StatusCommandFactory()),
+    END("end", 1, new EndCommandFactory());
 
     private static final int COMMAND_INDEX = 0;
 

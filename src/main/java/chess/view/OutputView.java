@@ -1,6 +1,7 @@
 package chess.view;
 
 import chess.domain.Board;
+import chess.domain.game.Score;
 import chess.domain.piece.Piece;
 import chess.domain.position.File;
 import chess.domain.position.Position;
@@ -15,6 +16,7 @@ public class OutputView {
         System.out.println("> 게임 시작 : start");
         System.out.println("> 게임 종료 : end");
         System.out.println("> 게임 이동 : move source위치 target위치 - 예. move b2 b3");
+        System.out.println("> 점수 확인 : status");
     }
 
     public static void printBoard(final Board board) {
@@ -33,6 +35,10 @@ public class OutputView {
             System.out.printf(PieceName.findNameByPiece(piece));
         }
         System.out.println();
+    }
+
+    public static void printScore(Score score) {
+        System.out.println("현재 점수는 " + score.value() + "점 입니다.");
     }
 
     public static void printErrorMessage(IllegalArgumentException e) {
